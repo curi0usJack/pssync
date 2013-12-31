@@ -22,6 +22,9 @@ Important to restate that this is really meant for a corporate or shared environ
 		-> Archive Directory:	Authorized Users get Read & Write access, but not Delete!. You don't want users to delete your backups!
 		
 		-> PSSYNC Directory:	Authorized Users get Read access only to this directory.
+		
+4) Modify the $remotemoduledir and $remotearchivedir variables in pssync.ps1 to reflect the UNC paths of the directories you setup in step #2 above.
+
 
 How-Tos
 
@@ -33,6 +36,7 @@ How-Tos
 			set-alias pssync "\\someserver\someshare$\PSSync\pssync.ps1"
 			pssync
 		4) 	Note, the last line is optional. Add it if you want to synchronize scripts every time you open powershell. If you want to sync on command, remove that line, and just type “pssync” from a powershell prompt whenever you wish to sync.
+		
 	- Adding a module to the repository.
 		Any modules that people want to sync must meet the following criteria:
 			a)	They must be in a directory that is named after the module. For instance, if a module named MyModule, then it must be in the following path: %USERPROFILE%\Documents\WindowsPowerShell\MyModule\MyModule.psm1. This is non-negotiable.
@@ -44,9 +48,11 @@ How-Tos
 			In this case “1” is the version number, but it can be any positive number you want, even decimals (1.0).
 		2)	Open powershell, type pssync.
 		3)	Done – the module is now in the repository (assuming you got no errors).
+		
 	- Retrieving a module from the repository
 		1)	If someone else adds a module and you want it right away, just launch powershell and type pssync (or, just launch powershell if you kept the code in your profile as is from the step above). You should then be able to run Get-Modules –ListAvailable and see their module.
 		2)	If you load a module, someone makes a change, and you want to update yours using pssync, best to close your existing powershell window & reopen it. Or, if you prefer, you can always unload the module from the current session & reload it after running pssync.
+		
 	- Updating a module
 		Say you need to make some changes and need those changes to be synced up to the repository, do the following:
 		1)	Make your changes
@@ -55,6 +61,7 @@ How-Tos
 		4)	Done. Once everyone else syncs, they will have the new version.
 		5)	No worries about overwriting. Every version of a script is backed up and archived to the archive directory configured in pssync. Any version can be recovered at any time simply
 			by copying it locally from the Archive directory, incrementing the version, and running pssync
+			
 	- Don’t want my module synced anymore
 		1)	Just take out the version statement from the module. No future changes will be propagated, and no changes anyone else makes will overwrite your copy. That said, everyone will still have a copy of the last module that was synced (until someone overwrites it)
 
