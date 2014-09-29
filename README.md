@@ -1,14 +1,11 @@
-####################
+#PowerShell Module Synchronization Repository
+###pssync.ps1
 
-pssync.ps1
-
-PowerShell Module Synchronization Repository
-
-PSSync is a simple powershell script that performs two way synchronization between the powershell modules on your machine and a central repository on a server. It works by looking for a version statement in any powershell module you wish to synchronize and performing synchronization if that statement is found. If the version statement is found, it will copy the module to the repository. Anyone who then runs pssync will receive a copy. Note this currently only supports powershell Modules (.psm1 files)
+__PSSync__ is a simple powershell script that performs two way synchronization between the powershell modules on your machine and a central repository on a server. It works by looking for a version statement in any powershell module you wish to synchronize and performing synchronization if that statement is found. If the version statement is found, it will copy the module to the repository. Anyone who then runs pssync will receive a copy. Note this currently only supports powershell Modules (.psm1 files)
 
 Important to restate that this is really meant for a corporate or shared environment. This uses SMB connections, and will not work across the internet.
 
-*** Pre-Requisites ***
+####Pre-Requisites
 
 1)	Hopefully you are a network admin (or are good friends with one <grin>). Have a network share setup and get modify rights to it. Assume \\someserver\someshare$.
 
@@ -26,7 +23,7 @@ Important to restate that this is really meant for a corporate or shared environ
 4) Modify the $remotemoduledir and $remotearchivedir variables in pssync.ps1 to reflect the UNC paths of the directories you setup in step #2 above.
 
 
-How-Tos
+####How-To's
 
 	- Setup your machine for pssync
 	
@@ -66,4 +63,4 @@ How-Tos
 		1)	Just take out the version statement from the module. No future changes will be propagated, and no changes anyone else makes will overwrite your copy. That said, everyone will still have a copy of the last module that was synced (until someone overwrites it)
 
 
-That's it! Hopefully you find it easy enough to use. Feedback is always welcome.
+That's it! Hopefully you find it easy enough to use. Feedback is always welcome, [@curi0usJack](https://twitter.com/curi0usJack)
